@@ -22,7 +22,7 @@ The callback is protected by the `#[vrf_callback]` macro. Only the VRF program c
 
 ## Live
 
-- dApp: `https://app-two-tan-71.vercel.app`
+- dApp: `https://world-passport-tgs.vercel.app`
 - Cluster: Devnet
 - Program: `BHjs3ULUTBfY5LSccdUGem37MBjTVMmLoCNPYn3QV1VV`
 - Example rip (request -> oracle -> proof -> stamp): see [`docs/devnet-proof.md`](docs/devnet-proof.md)
