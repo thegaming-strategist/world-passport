@@ -1,0 +1,8 @@
+node_modules
+target
+logs
+*.log
+.DS_Store
+.anchor
+app/idl
+keypairs-backup
