@@ -88,7 +88,8 @@ nav { display:flex; justify-content:space-between; align-items:center; gap:16px;
 .reveal-placeholder h4 { font-size:20px; font-family:Georgia,serif; font-weight:400; }
 .reveal-placeholder p { color:var(--muted); font-size:12px; max-width:290px; margin:10px auto 0; overflow-wrap:anywhere; }
 .reveal-placeholder small { display:block; color:var(--gold); margin-top:14px; font:10px ui-monospace,monospace; letter-spacing:1px; }
-[data-state=requesting] .reveal-symbol,[data-state=proving] .reveal-symbol { border-style:solid; border-top-color:var(--gold); animation:orbit 4s linear infinite; }
+[data-state=requesting] .reveal-symbol,[data-state=proving] .reveal-symbol { position:relative; border-color:transparent; }
+[data-state=requesting] .reveal-symbol::before,[data-state=proving] .reveal-symbol::before { content:''; position:absolute; inset:-1px; border:1px solid #60706b; border-top-color:var(--gold); border-radius:50%; animation:orbit 4s linear infinite; }
 @keyframes orbit { to { transform:rotate(360deg); } }
 [data-state=requesting] .state-badge,[data-state=proving] .state-badge { color:var(--gold); }
 [data-state=revealed] .state-badge { color:var(--green); }
@@ -107,10 +108,11 @@ nav { display:flex; justify-content:space-between; align-items:center; gap:16px;
 .meta { white-space:pre-line; font:10px/1.8 ui-monospace,monospace; color:var(--muted); margin-top:16px; overflow-wrap:anywhere; }
 .proof-status { color:var(--muted); font-size:11px; border-top:1px solid var(--border); margin-top:18px; padding-top:14px; }
 .proof-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-.proof-link { display:inline-flex; align-items:center; min-height:40px; color:var(--gold); border:1px solid var(--border); border-radius:5px; padding:8px 12px; font-size:11px; }
+.proof-link { display:inline-flex; align-items:center; min-height:44px; color:var(--gold); border:1px solid var(--border); border-radius:5px; padding:8px 12px; font-size:11px; }
 a.proof-link:hover { border-color:var(--gold); background:#c8b58a08; }
 .reveal-actions { display:flex; gap:14px; align-items:center; margin-top:14px; }
 .reveal-actions .btn { padding:8px 14px; font-size:12px; }
+.reveal-actions .text-link { display:inline-flex; align-items:center; min-height:44px; padding:10px 0; }
 .passport-section { margin:42px 0; }
 .passport-head { margin-bottom:18px; }
 .count { color:var(--gold); font:12px ui-monospace,monospace; }
@@ -546,7 +548,13 @@ async function waitConfirmed(sig) {
 document.getElementById('connectBtn').addEventListener('click', connect);
 document.getElementById('ripBtn').addEventListener('click', rip);
 document.getElementById('ripBtn2').addEventListener('click', rip);
-document.getElementById('showAllRegions').addEventListener('click', () => { activeRegion = null; render(); document.getElementById('albumLabel').textContent = 'All countries / select a region to explore'; });
+document.getElementById('showAllRegions').addEventListener('click', () => {
+  const previousRegion = activeRegion;
+  activeRegion = null;
+  render();
+  document.getElementById('albumLabel').textContent = 'All countries / select a region to explore';
+  document.querySelector(`[data-region="${previousRegion}"]`)?.focus({ preventScroll: true });
+});
 document.getElementById('programId').textContent = 'Program: ' + PROGRAM_ID;
 document.getElementById('programId').href = `https://explorer.solana.com/address/${PROGRAM_ID}?cluster=devnet`;
 render(); // paint the empty 195-country grid immediately, no wallet needed
