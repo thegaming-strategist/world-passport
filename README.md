@@ -31,7 +31,12 @@ The callback is protected by the `#[vrf_callback]` macro. Only the VRF program c
 
 The frontend keeps the loop deliberately small: connect, rip, wait for the VRF proof, reveal the country, then continue collecting. The interface borrows the useful parts of established pack-opening and passport products, including pre-rip rules, an explicit reveal sequence, regional collection progress, and explorer receipts. See [`docs/mechanics-inspiration.md`](docs/mechanics-inspiration.md).
 
-## Verification
+## Submission assets
+
+- Public proof: [`docs/devnet-proof.md`](docs/devnet-proof.md)
+- Demo run sheet: [`docs/demo-script.md`](docs/demo-script.md)
+- Submission copy: [`docs/submission-copy.md`](docs/submission-copy.md)
+
 
 - `node app/check.cjs` checks the inline browser program, protected IDs, VRF account list, browser crypto path, and no Anchor or Buffer dependency.
 - `node app/page-logic-test.cjs` checks discriminator bytes, seed packing, new-stamp detection, and duplicate detection.
@@ -52,4 +57,4 @@ anchor deploy  # devnet
 # serve app/ with any static server; put target/idl/world_passport.json at app/idl/
 ```
 
-Built by Russ Clarke for Solana Blitz v9. Randomness that proves itself.
+Built for Solana Blitz v9. Randomness that proves itself.

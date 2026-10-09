@@ -1,6 +1,7 @@
 // Syntax check of the inline script in app/index.html
 const fs = require('fs');
-const html = fs.readFileSync('C:/Users/russe/world-passport/app/index.html', 'utf8');
+const path = require('path');
+const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 const m = html.match(/<script>([\s\S]*?)<\/script>/);
 if (!m) { console.log('NO SCRIPT'); process.exit(1); }
 let js = m[1];
