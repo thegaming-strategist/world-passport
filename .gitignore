@@ -6,3 +6,18 @@ logs
 .anchor
 app/idl
 keypairs-backup
+
+# local verification harnesses and machine-specific scripts
+app/e2e-jsdom.cjs
+app/verify-parse.cjs
+app/verify-parse2.cjs
+app/mock-phantom.cjs
+app/run-e2e.cjs
+app/bridge-note.cjs
+live.cjs
+init.cjs
+init.mjs
+install-anchor.sh
+install-solana.sh
+setup-toolchain.sh
+test-live.mjs
